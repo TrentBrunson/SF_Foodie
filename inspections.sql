@@ -1,8 +1,8 @@
 /*
 Write SQL Statements to answer each of the following questions. You should use a single SQL statement
 for each question. The overall purpose of these questions is to confirm that you understand the basic
-syntax and functionality of SQL. In answering these questions, do not worry about the “quality” of the
-data. Write the queries to retrieve data “as is”.
+syntax and functionality of SQL. In answering these questions, do not worry about the ï¿½qualityï¿½ of the
+data. Write the queries to retrieve data ï¿½as isï¿½.
 1. (5 points) Create a list of food service businesses and their owners. Include the business id,
 business name, owner name, owner address, owner city, owner state, and owner ZIP columns.
 Sort the results by state, city, and business name.
@@ -14,7 +14,7 @@ should only include businesses that exist in the businesses table.
 5. (10 points) List the business id, business name, inspection date, inspection score, and inspection
 type for all inspections that included violation type id = 103123 (food in poor condition).
 6. (10 points) Create a list of latitude/longitude pairs for businesses that have latitude and
-longitude values and the latitude and longitude values are not equal to ‘0’. The result table
+longitude values and the latitude and longitude values are not equal to ï¿½0ï¿½. The result table
 should include business name, latitude, longitude, and the latitude/longitude pair. If the latitude
 for a record = 37.8 and longitude = -122.5, the latitude/longitude pair should look like (37.8, -
 122.5). Your result should include the (), comma, and space. 
@@ -92,7 +92,7 @@ SELECT b.business_id,
 
 /*
 6. (10 points) Create a list of latitude/longitude pairs for businesses that have latitude and
-longitude values and the latitude and longitude values are not equal to ‘0’. The result table
+longitude values and the latitude and longitude values are not equal to ï¿½0ï¿½. The result table
 should include business name, latitude, longitude, and the latitude/longitude pair. If the latitude
 for a record = 37.8 and longitude = -122.5, the latitude/longitude pair should look like (37.8, -
 122.5). Your result should include the (), comma, and space.
@@ -122,7 +122,7 @@ necessary to respond to the question. Add comments to explain your actions, obse
 conclusions.
 
 7. (15 points) Explore the type column in the inspections table. The data dictionary indicates that
-the inspection type “must be (initial, routine, followup).” Are there any inspections with an
+the inspection type ï¿½must be (initial, routine, followup).ï¿½ Are there any inspections with an
 inspection type that is not a valid value? List the business id, business name, inspection date,
 and inspection type for any inspections with invalid inspection types. Sort your results by
 inspection type.
@@ -153,7 +153,7 @@ SELECT b.business_id, name, date, type
 
 /*
 8. Explore the score column in the inspections table. Add a column with an appropriate
-numeric data type to store a “cleaned” version of the score. Clean the score data by converting
+numeric data type to store a ï¿½cleanedï¿½ version of the score. Clean the score data by converting
 the data into appropriate numeric values and storing the cleaned values in the new column you
 added. Store a NULL value in the cleaned column for any records with unknown numeric values
 for score.
@@ -191,7 +191,7 @@ SELECT clean_Score, Score FROM inspectionsAnalysis;
 
 /*
 9. Assume you would like to convert the violation risk category into a set of numeric
-values where High Risk = 3, Moderate Risk = 2, and Low Risk = 1 (i.e., create a “risk score” for
+values where High Risk = 3, Moderate Risk = 2, and Low Risk = 1 (i.e., create a ï¿½risk scoreï¿½ for
 each category). Add a column with an appropriate numeric data type to the violations table to
 store the numeric values for risk category. For each record, convert the risk category into a
 numeric score to store in the new column. The values in this new column represent a risk score. 
@@ -276,6 +276,4 @@ SELECT i.business_id [Business ID],
 This is producing errors due to the assignment of Risk Score based on
 Risk Category.  There were multiple violations in a single inspection date
 so there are multiple Risk Scores now for each date; JOINS will need to be corrected
-
-Out of time
 */
