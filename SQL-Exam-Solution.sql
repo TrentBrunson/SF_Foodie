@@ -1,10 +1,6 @@
-/* SQL MIDTERM EXAM SOLUTION */
-/* ++++++++++++++++++++++++++++++++ */
---	Question 1
-/*	(5 points) Create a list of food service businesses and their owners. Include the business id, 
+/*	Create a list of food service businesses and their owners. Include the business id, 
 	business name, owner name, owner address, owner city, owner state, and owner ZIP columns. 
 	Sort the results by state, city, and business name. */
-/* ++++++++++++++++++++++++++++++++ */
 
 SELECT business_id, [name], owner_name, owner_address, owner_city, owner_state, owner_zip
 FROM businesses
@@ -12,11 +8,8 @@ ORDER BY owner_state, owner_city, [name];
 
 -- RESULTS: 7,527 records
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 2
-/*	(5 points) How many records per business are included in the inspections table? Sort the 
+/*	How many records per business are included in the inspections table? Sort the 
 	result set in descending order by record count. */
-/* ++++++++++++++++++++++++++++++++ */
 
 SELECT business_id, COUNT(*) AS [Number of Inspections]
 FROM inspections
@@ -26,13 +19,11 @@ ORDER BY 2 DESC;
 -- RESULTS: 5,926 records; most inspections = 22; least inspections = 1
 -- It appears that some businesses have never been inspected
 
-/* ALTERNATE SOLUTION FOR QUESTION 2 */
--- this solution received full credit
+/* ALTERNATE SOLUTION  */
 
 -- the key difference is this query only returns records for businesses in inspections
 -- that exist in businesses
--- I do not include this as the main solution because I did not specify to filter the 
--- inspections table for matching businesses
+-- not the main solution since did not specify to filter the inspections table for matching businesses
 
 SELECT b.business_id, COUNT(*) AS [Number of Inspections]
 FROM inspections i
@@ -53,11 +44,8 @@ FROM inspections
 WHERE business_id NOT IN 
 	(SELECT DISTINCT business_id FROM businesses)
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 3
-/*	(10 points) Are there any businesses in the violations table that are not 
+/*	Are there any businesses in the violations table that are not 
 	in the businesses table? */
-/* ++++++++++++++++++++++++++++++++ */
 
 SELECT DISTINCT business_id
 FROM violations
@@ -66,8 +54,7 @@ WHERE business_id NOT IN
 
 -- RESULTS: 22 records meaning 22 businesses are listed in violations but have no match in businesses
 
-/* ALTERNATE SOLUTION FOR QUESTION 3 */
--- this solution will receive partial credit
+/* ALTERNATE SOLUTION */
  
 -- the key difference is the first query returns the 22 business ids for businesses that 
 -- are in the violations table but not in the businesses table
@@ -81,11 +68,8 @@ FROM violations
 WHERE business_id NOT IN 
 	(SELECT DISTINCT business_id FROM businesses);
 
-/* ++++++++++++++++++++++++++++++++ */
--- Question 4
-/*	(10 points) How many violations does each business have for each inspection? Your 
+/*	How many violations does each business have for each inspection? Your 
 	response should only include businesses that exist in the businesses table. */
-/* ++++++++++++++++++++++++++++++++ */
 
 SELECT b.business_id, i.[date], i.Score, COUNT(*) AS [Number of Violations]
 FROM violations v JOIN businesses b
@@ -96,8 +80,7 @@ ORDER BY b.business_id, i.[date], i.Score;
 
 --	RESULTS: 13,835 records
 
-/* ALTERNATE SOLUTION FOR QUESTION 4 */
--- this solution will receive full credit
+/* ALTERNATE SOLUTION */
 
 -- the key difference between this alternative and the first solution is selecting and grouping 
 -- inspection score. By excluding the inspection score, this solution ignores that multiple 
@@ -111,7 +94,7 @@ ORDER BY b.business_id;
 
 -- RESULTS: 12,884 records
 
-/* ALTERNATE SOLUTION FOR QUESTION 4 */
+/* ALTERNATE SOLUTION */
 -- this solution will receive full credit
 
 -- the key difference between this alternative and the previous alternative is grouping by business_id
@@ -126,7 +109,7 @@ ORDER BY b.name;
 
 -- RESULTS: 12,830 records 
 
-/* ALTERNATE SOLUTION FOR QUESTION 4 */
+/* ALTERNATE SOLUTION */
 -- this solution will receive partial credit
 
 -- a key difference between for this alternative is the other solutions only returns records
@@ -139,12 +122,9 @@ ORDER BY business_id;
 
 -- RESULTS: 12,935 records
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 5
-/*	(10 points) List the business id, business name, inspection date, inspection score, and 
+/*	List the business id, business name, inspection date, inspection score, and 
 	inspection type for all inspections that included violation type id = 103123 (food in 
 	poor condition).  */
-/* ++++++++++++++++++++++++++++++++ */
 
 SELECT b.business_id, b.name, i.date, i.Score, i.type
 FROM businesses b JOIN inspections i
@@ -190,15 +170,11 @@ FROM businesses b JOIN inspections i
 	ON i.business_id = v.business_id AND i.date = v.date
 WHERE ViolationTypeID = '103123' AND i.Score = '';
 
-
-/* ++++++++++++++++++++++++++++++++ */
---	Question 6
-/*	(10 points) Create a list of latitude/longitude pairs for businesses that have latitude 
-	and longitude values and the latitude and longitude values are not equal to ‘0’. The result 
+/*	Create a list of latitude/longitude pairs for businesses that have latitude 
+	and longitude values and the latitude and longitude values are not equal to ï¿½0ï¿½. The result 
 	table should include business name, latitude, longitude, and the latitude/longitude pair. 
 	If the latitude for a record = 37.8 and longitude = -122.5, the latitude/longitude pair 
 	should look like (37.8, -122.5). Your result should include the (), comma, and space.  */
-/* ++++++++++++++++++++++++++++++++ */
 
 SELECT name, latitude, longitude, '(' + latitude + ', ' + longitude + ')' AS 'Lat/Long Pair'
 FROM businesses
@@ -207,17 +183,13 @@ ORDER BY latitude, longitude;
 
 -- RESULTS: 4,511 records
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 7
-/*	(15 points) Explore the type column in the inspections table. The data dictionary indicates 
-	that the inspection type “must be (initial, routine, followup).” Are there any inspections with 
+/*	Explore the type column in the inspections table. The data dictionary indicates 
+	that the inspection type ï¿½must be (initial, routine, followup).ï¿½ Are there any inspections with 
 	an inspection type that is not a valid value? List the business id, business name, inspection 
 	date, and inspection type for any inspections with invalid inspection types. Sort your results 
 	by inspection type.  */
-/* ++++++++++++++++++++++++++++++++ */
 
--- a partial credit answer might be similar to the following (10 of 15 points)
--- however, this solution does not tell a complete story 
+-- this solution does not tell a complete story 
 
 SELECT b.business_id, b.name, i.date, i.type, i.Score
 FROM businesses b JOIN inspections i
@@ -251,13 +223,11 @@ ORDER BY i.type;
 -- an interesting observation is that only three of these inspections that have non-valid inspection types
 -- according to the data dictionary have inspection scores (change order by to i.score desc)
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 8
-/*	(25 points) Explore the score column in the inspections table. Add a column with an appropriate numeric 
-	data type to store a “cleaned” version of the score. Clean the score data by converting the data into 
+
+/*	Explore the score column in the inspections table. Add a column with an appropriate numeric 
+	data type to store a ï¿½cleanedï¿½ version of the score. Clean the score data by converting the data into 
 	appropriate numeric values and storing the cleaned values in the new column you added. Store a NULL 
 	value in the cleaned column for any records with unknown numeric values for score.  */
-/* ++++++++++++++++++++++++++++++++ */
 
 -- create a clean inspections table to work with
 
@@ -303,15 +273,12 @@ SELECT * FROM clean_inspections;
 
 -- It appears that my conversion to int data type for clean_score was completed accurately
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 9
-/*	(25 points) Assume you would like to convert the violation risk category into a set of 
+/* Assume you would like to convert the violation risk category into a set of 
 	numeric values where High Risk = 3, Moderate Risk = 2, and Low Risk = 1 (i.e., create 
-	a “risk score” for each category). Add a column with an appropriate numeric data type 
+	a ï¿½risk scoreï¿½ for each category). Add a column with an appropriate numeric data type 
 	to the violations table to store the numeric values for risk category. For each record, 
 	convert the risk category into a numeric score to store in the new column. The values in 
 	this new column represent a risk score.  */
-/* ++++++++++++++++++++++++++++++++ */
 
 -- create a clean_violations table to work with
 
@@ -348,9 +315,7 @@ SELECT * FROM clean_violations ORDER BY clean_risk_score;
 
 -- It appears my data conversion was successful
 
-/* ++++++++++++++++++++++++++++++++ */
---	Question 10
-/*	(25 points) Create a new table that includes the following columns from the inspections and 
+/*	Create a new table that includes the following columns from the inspections and 
 	violations tables. Name the new table [cleaned_inspections_data]. 
 
 	a.	Business id
@@ -360,7 +325,6 @@ SELECT * FROM clean_violations ORDER BY clean_risk_score;
 	e.	Count of violation records associated with the inspection
 	f.	Total risk score for the violations associated with the inspection (see #9)
   */
-/* ++++++++++++++++++++++++++++++++ */
 
 -- I will use a select into statement to create the final data set. Because the question does not
 -- ask for any fields that are included in the businesses table beyond the business_id, I will 
