@@ -52,6 +52,11 @@ SELECT * FROM violations
 		(SELECT DISTINCT business_id FROM businesses);
 -- 109 violation records returned not in the businesses table
 
+SELECT DISTINCT business_id FROM violations
+	WHERE business_id NOT IN
+		(SELECT DISTINCT business_id FROM businesses);
+		-- 22 unique values
+
 -- 4. (10 points) How many violations does each business have for each inspection? Your response
 -- should only include businesses that exist in the businesses table.
 SELECT * FROM violations
